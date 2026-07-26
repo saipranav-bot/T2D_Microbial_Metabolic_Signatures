@@ -1,23 +1,57 @@
-# Large data files
-results/metacardis_pathway_abundance.csv
-results/metacardis_filtered_pathways.csv
+# ==========================
+# Raw datasets
+# ==========================
+data/raw/
 
-# Temporary previews
-preview_figures/
+# ==========================
+# Large analysis outputs
+# ==========================
+results/maaslin2_T2D_control/
+*.rds
 
+# ==========================
 # R temporary files
+# ==========================
 .Rhistory
 .RData
 .Ruserdata
+00LOCK*
 
-# System files
-.DS_Store
+# ==========================
+# Logs
+# ==========================
 *.log
+logs/
 
-# Python/conda
+# ==========================
+# Python cache
+# ==========================
 __pycache__/
 *.pyc
 
+# ==========================
+# System files
+# ==========================
+.DS_Store
+
+# ==========================
+# Cytoscape files
+# ==========================
+*.cys
+
+# ==========================
 # Temporary files
+# ==========================
 *.tmp
 *.swp
+
+# ==========================
+# Conda package archives
+# ==========================
+envs/*.tar.gz
+
+# ==========================
+# Large intermediate tables
+# ==========================
+results/metacardis_pathway_abundance.csv
+results/metacardis_filtered_pathways.csv
