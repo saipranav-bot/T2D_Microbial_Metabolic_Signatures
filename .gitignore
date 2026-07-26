@@ -58,3 +58,18 @@ results/metacardis_filtered_pathways.csv
 
 # MAASLIN backup/intermediate files
 misc/maaslin2_backup/
+
+# Large intermediate result matrices
+results/metacardis_pathway_abundance.csv
+results/metacardis_filtered_pathways.csv
+results/maaslin2_features.tsv
+results/species_pathway_correlations.csv
+results/species_pathway_correlations_significant.csv
+
+# Large generated outputs
+results/*.rds
+results/*.tsv
+
+# Temporary analysis files
+results/*/features/
+results/*/fits/
