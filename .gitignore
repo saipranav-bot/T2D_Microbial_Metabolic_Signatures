@@ -55,3 +55,6 @@ envs/*.tar.gz
 # ==========================
 results/metacardis_pathway_abundance.csv
 results/metacardis_filtered_pathways.csv
+
+# MAASLIN backup/intermediate files
+misc/maaslin2_backup/
