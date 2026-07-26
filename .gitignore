@@ -1,86 +1,49 @@
-# ==================================================
-# T2D Microbial Metabolic Signatures
-# Git ignore configuration
-# ==================================================
-
-# --------------------------
-# Raw data
-# --------------------------
-data/raw/
-
-
-# --------------------------
-# Large intermediate results
-# --------------------------
-results/metacardis_pathway_abundance.csv
-results/metacardis_filtered_pathways.csv
-results/maaslin2_features.tsv
-results/species_pathway_correlations.csv
-results/species_pathway_correlations_significant.csv
-
-# Large generated result files
-results/*.rds
-results/*.tsv
-
-# MAASLIN intermediate outputs
-results/maaslin2_T2D_control/
-
-# Intermediate feature folders
-results/*/features/
-results/*/fits/
-
-
-# --------------------------
-# Temporary analysis files
-# --------------------------
+# ===============================
+# R temporary files
+# ===============================
 .Rhistory
 .RData
 .Ruserdata
-00LOCK*
-
+# ===============================
+# R package cache
+# ===============================
+renv/library/
+packrat/lib/
+# ===============================
+# Temporary files
+# ===============================
 *.tmp
-*.swp
-
-
-# --------------------------
-# Logs
-# --------------------------
 *.log
-logs/
-
-
-# --------------------------
-# Python files
-# --------------------------
-__pycache__/
-*.pyc
-
-
-# --------------------------
-# System files
-# --------------------------
+*.bak
+# ===============================
+# Large sequencing / microbiome data
+# ===============================
+data/raw/
+*.fastq
+*.fq
+*.bam
+*.sam
+*.vcf
+# ===============================
+# Intermediate files
+# ===============================
+data/processed/
+temp/
+cache/
+# ===============================
+# OS files
+# ===============================
 .DS_Store
-
-
-# --------------------------
-# Cytoscape files
-# --------------------------
-*.cys
-
-
-# --------------------------
-# Conda files
-# --------------------------
-envs/*.tar.gz
-
-
-# --------------------------
-# Backup files
-# --------------------------
-misc/maaslin2_backup/
-
-
-# --------------------------
-# Temporary preview files
-# --------------------------
-preview_figures/
+Thumbs.db
+# ===============================
+# Large R objects
+# Keep final objects only
+# ===============================
+*.rds
+*.RData
+# ===============================
+# Keep important results
+# ===============================
+!results/R_objects/
+!results/Tables/
+!results/Figures/

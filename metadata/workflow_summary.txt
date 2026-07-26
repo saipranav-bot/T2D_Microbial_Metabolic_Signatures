@@ -1,0 +1,18 @@
+HMP2 Type 2 Diabetes Microbiome Analysis
+
+Workflow:
+1. Metadata preparation
+2. Microbiome abundance preprocessing
+3. Clinical trait extraction
+4. MaAsLin2 association testing
+5. Significant microbial feature identification
+6. Hub species ranking
+7. Functional annotation
+8. Network visualization
+9. Publication-quality figures and tables
+
+Main outputs:
+- Species-trait association tables
+- Hub microbial species
+- Microbiome metabolic networks
+- Publication figures

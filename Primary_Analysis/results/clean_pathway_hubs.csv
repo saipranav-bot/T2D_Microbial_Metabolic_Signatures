@@ -1,0 +1,155 @@
+"Node","Degree"
+"VALSYN PWY  L valine biosynthesis",17
+"PWY 7111  pyruvate fermentation to isobutanol  engineered ",16
+"PWY 6122  5 aminoimidazole ribonucleotide biosynthesis II",16
+"PWY 6277  superpathway of 5 aminoimidazole ribonucleotide biosynthesis",16
+"PWY 7221  guanosine ribonucleotides de novo biosynthesis",15
+"DTDPRHAMSYN PWY  dTDP L rhamnose biosynthesis I",14
+"COA PWY 1  coenzyme A biosynthesis II  mammalian ",14
+"COA PWY  coenzyme A biosynthesis I",13
+"PWY 6387  UDP N acetylmuramoyl pentapeptide biosynthesis I  meso diaminopimelate containing ",13
+"PWY 2942  L lysine biosynthesis III",13
+"PWY 5686  UMP biosynthesis",12
+"PWY 5097  L lysine biosynthesis VI",12
+"PWY 6700  queuosine biosynthesis",11
+"PWY 6609  adenine and adenosine salvage III",11
+"PWY 6121  5 aminoimidazole ribonucleotide biosynthesis I",11
+"PWY 5667  CDP diacylglycerol biosynthesis I",11
+"PWY0 1319  CDP diacylglycerol biosynthesis II",11
+"PEPTIDOGLYCANSYN PWY  peptidoglycan biosynthesis I  meso diaminopimelate containing ",10
+"PWY 6124  inosine 5  phosphate biosynthesis II",9
+"PWY 5695  urate biosynthesis inosine 5  phosphate degradation",8
+"PWY 7219  adenosine ribonucleotides de novo biosynthesis",8
+"HSERMETANA PWY  L methionine biosynthesis III",8
+"PWY 6385  peptidoglycan biosynthesis III  mycobacteria ",8
+"RIBOSYN2 PWY  flavin biosynthesis I  bacteria and plants ",7
+"PWY 6737  starch degradation V",7
+"PWY 6151  S adenosyl L methionine cycle I",7
+"ARGSYNBSUB PWY  L arginine biosynthesis II  acetyl cycle ",7
+"PWY 6168  flavin biosynthesis III  fungi ",7
+"PWY 1042  glycolysis IV  plant cytosol ",7
+"PWY 6386  UDP N acetylmuramoyl pentapeptide biosynthesis II  lysine containing ",7
+"SER GLYSYN PWY  superpathway of L serine and glycine biosynthesis I",7
+"ARGSYN PWY  L arginine biosynthesis I  via L ornithine ",6
+"PWY 7400  L arginine biosynthesis IV  archaebacteria ",6
+"PWY 7220  adenosine deoxyribonucleotides de novo biosynthesis II",6
+"PWY 7222  guanosine deoxyribonucleotides de novo biosynthesis II",6
+"GLUTORN PWY  L ornithine biosynthesis",6
+"PWY 7357  thiamin formation from pyrithiamine and oxythiamine  yeast ",6
+"PWY 6936  seleno amino acid biosynthesis",6
+"PWY 6703  preQ0 biosynthesis",6
+"PWY 5188  tetrapyrrole biosynthesis I  from glutamate ",6
+"ILEUSYN PWY  L isoleucine biosynthesis I  from threonine ",6
+"PWY 5103  L isoleucine biosynthesis III",6
+"BRANCHED CHAIN AA SYN PWY  superpathway of branched amino acid biosynthesis",6
+"PWY 3841  folate transformations II",6
+"NONOXIPENT PWY  pentose phosphate pathway  non oxidative branch ",5
+"GLYCOGENSYNTH PWY  glycogen biosynthesis I  from ADP D Glucose ",5
+"PWY0 1296  purine ribonucleosides degradation",5
+"HISTSYN PWY  L histidine biosynthesis",5
+"PWY 4242  pantothenate and coenzyme A biosynthesis III",5
+"TRPSYN PWY  L tryptophan biosynthesis",5
+"PWY 724  superpathway of L lysine  L threonine and L methionine biosynthesis II",5
+"PANTO PWY  phosphopantothenate biosynthesis I",5
+"UDPNAGSYN PWY  UDP N acetyl D glucosamine biosynthesis I",5
+"TRNA CHARGING PWY  tRNA charging",4
+"PWY 6892  thiazole biosynthesis I  E  coli ",4
+"CALVIN PWY  Calvin Benson Bassham cycle",4
+"RHAMCAT PWY  L rhamnose degradation I",4
+"PWY 7228  superpathway of guanosine nucleotides de novo biosynthesis I",4
+"PWY 6897  thiamin salvage II",4
+"PWY 7663  gondoate biosynthesis  anaerobic ",3
+"PWY 6123  inosine 5  phosphate biosynthesis I",3
+"PWY0 1586  peptidoglycan maturation  meso diaminopimelate containing ",2
+"PWY 6803  phosphatidylcholine acyl editing",2
+"PWY 6163  chorismate biosynthesis from 3 dehydroquinate",2
+"PWY 5973  cis vaccenate biosynthesis",2
+"ARGININE SYN4 PWY  L ornithine de novo  biosynthesis",2
+"X1CMET2 PWY  N10 formyl tetrahydrofolate biosynthesis",2
+"ASPASN PWY  superpathway of L aspartate and L asparagine biosynthesis",2
+"PWY 6147  6 hydroxymethyl dihydropterin diphosphate biosynthesis I",2
+"PWY 7208  superpathway of pyrimidine nucleobases salvage",2
+"PWY 7197  pyrimidine deoxyribonucleotide phosphorylation",2
+"GLYOXYLATE BYPASS  glyoxylate cycle",1
+"FAO PWY  fatty acid  beta  oxidation I",1
+"PWY 5675  nitrate reduction V  assimilatory ",1
+"PWY 4702  phytate degradation I",1
+"PWY 5136  fatty acid  beta  oxidation II  peroxisome ",1
+"TCA GLYOX BYPASS  superpathway of glyoxylate bypass and TCA",1
+"PWY 5723  Rubisco shunt",1
+"PWY 5173  superpathway of acetyl CoA biosynthesis",1
+"GLYCOLYSIS TCA GLYOX BYPASS  superpathway of glycolysis  pyruvate dehydrogenase  TCA  and glyoxylate bypass",1
+"KETOGLUCONMET PWY  ketogluconate metabolism",1
+"GLUCARDEG PWY  D glucarate degradation I",1
+"PWY 5913  TCA cycle VI  obligate autotrophs  unclassified",1
+"P461 PWY  hexitol fermentation to lactate  formate  ethanol and acetate",1
+"PWY 821  superpathway of sulfur amino acid biosynthesis  Saccharomyces cerevisiae ",1
+"GALACTARDEG PWY  D galactarate degradation I",1
+"GLUCARGALACTSUPER PWY  superpathway of D glucarate and D galactarate degradation",1
+"PWY0 1415  superpathway of heme biosynthesis from uroporphyrinogen III",1
+"PWY 5747  2 methylcitrate cycle II",1
+"PWY 5656  mannosylglycerate biosynthesis I",1
+"PWY 6629  superpathway of L tryptophan biosynthesis",1
+"PWY 5173  superpathway of acetyl CoA biosynthesis unclassified",1
+"PWY 5083  NAD NADH phosphorylation and dephosphorylation unclassified",1
+"PWY 5918  superpathay of heme biosynthesis from glutamate",1
+"PWY 561  superpathway of glyoxylate cycle and fatty acid degradation",1
+"PWY 7254  TCA cycle VII  acetate producers ",1
+"PWY 5675  nitrate reduction V  assimilatory  unclassified",1
+"P105 PWY  TCA cycle IV  2 oxoglutarate decarboxylase ",1
+"GLYOXYLATE BYPASS  glyoxylate cycle unclassified",1
+"FERMENTATION PWY  mixed acid fermentation unclassified",1
+"POLYAMSYN PWY  superpathway of polyamine biosynthesis I unclassified",1
+"PWY 6507  4 deoxy L threo hex 4 enopyranuronate degradation",1
+"GALACTUROCAT PWY  D galacturonate degradation I",1
+"PWY 5177  glutaryl CoA degradation",1
+"PWY66 422  D galactose degradation V  Leloir pathway ",1
+"PWY 7242  D fructuronate degradation",1
+"PWY 6305  putrescine biosynthesis IV",1
+"HISDEG PWY  L histidine degradation I",1
+"ANAGLYCOLYSIS PWY  glycolysis III  from glucose ",1
+"PWY 6125  superpathway of guanosine nucleotides de novo biosynthesis II",1
+"PENTOSE P PWY  pentose phosphate pathway",1
+"PANTOSYN PWY  pantothenate and coenzyme A biosynthesis I",1
+"PYRIDNUCSYN PWY  NAD biosynthesis I  from aspartate ",1
+"PWY 6126  superpathway of adenosine nucleotides de novo biosynthesis II",1
+"PWY 7229  superpathway of adenosine nucleotides de novo biosynthesis I",1
+"ARO PWY  chorismate biosynthesis I",1
+"PWY 7539  6 hydroxymethyl dihydropterin diphosphate biosynthesis III  Chlamydia ",1
+"COMPLETE ARO PWY  superpathway of aromatic amino acid biosynthesis",1
+"PWY 7199  pyrimidine deoxyribonucleosides salvage unclassified",1
+"PWY 6700  queuosine biosynthesis unclassified",1
+"PWY 6163  chorismate biosynthesis from 3 dehydroquinate unclassified",1
+"PWY 7221  guanosine ribonucleotides de novo biosynthesis unclassified",1
+"PWY 5686  UMP biosynthesis unclassified",1
+"PWY 3841  folate transformations II unclassified",1
+"TRNA CHARGING PWY  tRNA charging unclassified",1
+"ARO PWY  chorismate biosynthesis I unclassified",1
+"PWY 6609  adenine and adenosine salvage III unclassified",1
+"HISTSYN PWY  L histidine biosynthesis unclassified",1
+"PWY 6387  UDP N acetylmuramoyl pentapeptide biosynthesis I  meso diaminopimelate containing  unclassified",1
+"PEPTIDOGLYCANSYN PWY  peptidoglycan biosynthesis I  meso diaminopimelate containing  unclassified",1
+"PWY 6386  UDP N acetylmuramoyl pentapeptide biosynthesis II  lysine containing  unclassified",1
+"PWY 4242  pantothenate and coenzyme A biosynthesis III unclassified",1
+"COA PWY 1  coenzyme A biosynthesis II  mammalian  unclassified",1
+"COMPLETE ARO PWY  superpathway of aromatic amino acid biosynthesis unclassified",1
+"X1CMET2 PWY  N10 formyl tetrahydrofolate biosynthesis unclassified",1
+"PWY 6385  peptidoglycan biosynthesis III  mycobacteria  unclassified",1
+"COA PWY  coenzyme A biosynthesis I unclassified",1
+"PWY0 1296  purine ribonucleosides degradation unclassified",1
+"ARGSYNBSUB PWY  L arginine biosynthesis II  acetyl cycle  unclassified",1
+"PWY 6121  5 aminoimidazole ribonucleotide biosynthesis I unclassified",1
+"PWY 7219  adenosine ribonucleotides de novo biosynthesis unclassified",1
+"PANTOSYN PWY  pantothenate and coenzyme A biosynthesis I unclassified",1
+"PWY 6151  S adenosyl L methionine cycle I unclassified",1
+"PWY 5097  L lysine biosynthesis VI unclassified",1
+"PWY 2942  L lysine biosynthesis III unclassified",1
+"PWY 6122  5 aminoimidazole ribonucleotide biosynthesis II unclassified",1
+"PWY 6277  superpathway of 5 aminoimidazole ribonucleotide biosynthesis unclassified",1
+"PWY 1042  glycolysis IV  plant cytosol  unclassified",1
+"PWY 6737  starch degradation V unclassified",1
+"PWY 5667  CDP diacylglycerol biosynthesis I unclassified",1
+"PWY0 1319  CDP diacylglycerol biosynthesis II unclassified",1
+"DTDPRHAMSYN PWY  dTDP L rhamnose biosynthesis I unclassified",1
+"PWY 724  superpathway of L lysine  L threonine and L methionine biosynthesis II unclassified",1
+"PWY 7199  pyrimidine deoxyribonucleosides salvage",1

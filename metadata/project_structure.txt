@@ -1,0 +1,40 @@
+HMP2_T2D_Microbiome_Analysis/
+|-- data/
+|   |-- processed/
+|   |-- raw/
+|-- metadata/
+|   |-- analysis_metadata.csv
+|   |-- software_used.csv
+|   |-- workflow_summary.txt
+|-- results/
+|   |-- Figures/
+|   |-- R_objects/
+|   |-- Tables/
+|-- scripts/
+|   |-- 01_metadata_preparation.R
+|   |-- 02_microbiome_preprocessing.R
+|   |-- 03_maaslin2_HbA1c.R
+|   |-- 04_maaslin2_Glucose.R
+|   |-- 05_maaslin2_Triglycerides.R
+|   |-- 06_maaslin2_HDL.R
+|   |-- 07_maaslin2_LDL.R
+|   |-- 08_maaslin2_Glucose.R
+|   |-- 09_publication_tables.R
+|   |-- 10_hub_species_analysis.R
+|   |-- 11_species_trait_heatmap.R
+|   |-- 12_microbial_pathway_annotation.R
+|   |-- 13_pathway_summary_visualization.R
+|   |-- 14_hub_species_ranking.R
+|   |-- 15_hub_species_plot.R
+|   |-- 16_species_trait_heatmap.R
+|   |-- 17_species_trait_overlap.R
+|   |-- 18_microbiome_trait_network.R
+|   |-- 19_hub_species_ranking.R
+|   |-- 20_hub_species_plot.R
+|   |-- 21_heatmap.R
+|   |-- 22_network_plot.R
+|   |-- 23_upset_plot.R
+|   |-- 24_session_info.R
+|   |-- 25_copy_final_results.R
+|   |-- 26_generate_README_metadata.R
+|   |-- 27_create_project_tree.R
