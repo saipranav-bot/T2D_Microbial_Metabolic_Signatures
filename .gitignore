@@ -1,0 +1,23 @@
+# Large data files
+results/metacardis_pathway_abundance.csv
+results/metacardis_filtered_pathways.csv
+
+# Temporary previews
+preview_figures/
+
+# R temporary files
+.Rhistory
+.RData
+.Ruserdata
+
+# System files
+.DS_Store
+*.log
+
+# Python/conda
+__pycache__/
+*.pyc
+
+# Temporary files
+*.tmp
+*.swp
