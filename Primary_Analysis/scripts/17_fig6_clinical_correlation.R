@@ -1,19 +1,39 @@
+#!/usr/bin/env Rscript
+
 library(dplyr)
 library(tidyr)
+library(ggplot2)
 library(ComplexHeatmap)
 library(circlize)
+library(pheatmap)
 
+
+
+outdir <- "figures/Figure6_Clinical"
 
 dir.create(
-"figures/Figure6_Clinical",
+outdir,
 recursive=TRUE,
 showWarnings=FALSE
 )
 
 
-# -----------------------------
-# Load pathway abundance
-# -----------------------------
+
+# =====================================================
+# Load data
+# =====================================================
+
+diff <- read.csv(
+"results/metacardis_differential_pathways.csv",
+check.names=FALSE
+)
+
+
+meta <- read.csv(
+"results/metacardis_T2D_control_metadata.csv",
+check.names=FALSE
+)
+
 
 pathway <- read.csv(
 "results/metacardis_pathway_abundance.csv",
@@ -21,79 +41,308 @@ check.names=FALSE
 )
 
 
+
+
+# =====================================================
+# PANEL A
+# Differential pathways
+# =====================================================
+
+
+top_diff <- diff %>%
+
+filter(
+!grepl(
+"UNINTEGRATED",
+pathway
+)
+) %>%
+
+arrange(FDR) %>%
+
+slice_head(n=20)
+
+
+
+top_diff$short_pathway <-
+
+gsub(
+"_",
+" ",
+substr(
+top_diff$pathway,
+1,
+55
+)
+)
+
+
+top_diff$short_pathway <-
+
+factor(
+top_diff$short_pathway,
+levels=
+rev(top_diff$short_pathway)
+)
+
+
+
+p1 <- ggplot(
+
+top_diff,
+
+aes(
+x=short_pathway,
+y=log2FC
+)
+
+)+
+
+geom_col(
+fill="#B2182B"
+)+
+
+coord_flip()+
+
+theme_classic()+
+
+labs(
+
+title="Top T2D-associated microbial pathways",
+
+x=NULL,
+
+y="log2 Fold Change"
+
+)
+
+
+
+ggsave(
+
+paste0(
+outdir,
+"/Fig6A_differential_pathways.png"
+),
+
+p1,
+
+width=8,
+
+height=6,
+
+dpi=600,
+
+bg="white"
+
+)
+
+
+
+ggsave(
+
+paste0(
+outdir,
+"/Fig6A_differential_pathways.pdf"
+),
+
+p1,
+
+width=8,
+
+height=6,
+
+device=cairo_pdf
+
+)
+
+
+
+
+# =====================================================
+# Prepare abundance matrix
+# =====================================================
+
+
 rownames(pathway) <- pathway[,1]
+
 pathway <- pathway[,-1]
 
 
-# transpose
 pathway <- as.data.frame(t(pathway))
+
+
 pathway$sample_id <- rownames(pathway)
 
 
 
-# -----------------------------
-# Load metadata
-# -----------------------------
-
-meta <- read.csv(
-"results/metacardis_T2D_control_metadata.csv",
-stringsAsFactors=FALSE
-)
-
-meta$sample_id <- meta$X
-
-
-
-# -----------------------------
-# Select top pathways
-# -----------------------------
-
-ranked <- read.csv(
-"results/ranked_metabolic_signatures.csv"
-)
-
-top_paths <- ranked %>%
-filter(!grepl("UNINTEGRATED", pathway)) %>%
-arrange(FDR) %>%
-slice_head(n=20) %>%
-pull(pathway)
-
-
-
-# keep common pathways
-
-common_paths <- intersect(
-top_paths,
-colnames(pathway)
-)
-
-
-data <- pathway[,c(
-"sample_id",
-common_paths
-)]
-
-
-# merge metadata
-
 merged <- inner_join(
-data,
+
+pathway,
+
 meta,
+
 by="sample_id"
-)
 
-
-cat(
-"Matched samples:",
-nrow(merged),
-"\n"
 )
 
 
 
-# -----------------------------
-# Correlation
-# -----------------------------
+# select pathways
+
+keep <- intersect(
+
+top_diff$pathway,
+
+colnames(merged)
+
+)
+
+
+
+heat <- merged[,keep]
+
+
+
+rownames(heat) <- merged$sample_id
+
+
+
+heat <- as.matrix(heat)
+
+
+
+# scale
+
+heat <- scale(heat)
+
+
+
+
+# =====================================================
+# PANEL B
+# Pathway heatmap
+# =====================================================
+
+
+annotation <- data.frame(
+
+Disease =
+merged$study_condition
+
+)
+
+
+rownames(annotation)<-
+
+merged$sample_id
+
+
+
+png(
+
+paste0(
+outdir,
+"/Fig6B_pathway_heatmap.png"
+),
+
+width=2600,
+
+height=3000,
+
+res=300
+
+)
+
+
+
+pheatmap(
+
+t(heat),
+
+annotation_col=annotation,
+
+cluster_cols=TRUE,
+
+cluster_rows=TRUE,
+
+show_colnames=FALSE,
+
+fontsize_row=8,
+
+color=colorRampPalette(
+c(
+"#2166AC",
+"white",
+"#B2182B"
+)
+)(100),
+
+main=
+"T2D-associated microbial pathway abundance"
+
+)
+
+
+
+dev.off()
+
+
+
+pdf(
+
+paste0(
+outdir,
+"/Fig6B_pathway_heatmap.pdf"
+),
+
+width=10,
+
+height=12
+
+)
+
+
+
+pheatmap(
+
+t(heat),
+
+annotation_col=annotation,
+
+cluster_cols=TRUE,
+
+cluster_rows=TRUE,
+
+show_colnames=FALSE,
+
+fontsize_row=8,
+
+color=colorRampPalette(
+c(
+"#2166AC",
+"white",
+"#B2182B"
+)
+)(100),
+
+main=
+"T2D-associated microbial pathway abundance"
+
+)
+
+
+
+dev.off()
+
+
+
+
+# =====================================================
+# PANEL C
+# Clinical correlation
+# =====================================================
+
 
 clinical <- merged[,c(
 "BMI",
@@ -101,69 +350,83 @@ clinical <- merged[,c(
 )]
 
 
-path_mat <- merged[,common_paths]
 
+cor_mat <- cor(
 
-cor_matrix <- matrix(
-NA,
-nrow=ncol(path_mat),
-ncol=ncol(clinical)
-)
+merged[,keep],
 
-rownames(cor_matrix) <- colnames(path_mat)
-colnames(cor_matrix) <- colnames(clinical)
+clinical,
 
-
-
-for(i in 1:ncol(path_mat)){
-for(j in 1:ncol(clinical)){
-
-cor_matrix[i,j] <-
-cor(
-path_mat[,i],
-clinical[,j],
 method="spearman",
+
 use="complete.obs"
+
 )
 
-}
-}
 
 
+rownames(cor_mat)<-
 
-# clean names
-
-rownames(cor_matrix) <-
+gsub(
+"_",
+" ",
 substr(
-rownames(cor_matrix),
+rownames(cor_mat),
 1,
-45
+40
+)
 )
 
 
 
-# -----------------------------
-# Plot
-# -----------------------------
+png(
 
-pdf(
-"figures/Figure6_Clinical/Fig6_clinical_pathway_heatmap.pdf",
-width=8,
-height=10
+paste0(
+outdir,
+"/Fig6C_clinical_correlation.png"
+),
+
+width=1600,
+
+height=1800,
+
+res=300,
+
+bg="white"
+
 )
 
 
-Heatmap(
-cor_matrix,
-name="Spearman\nrho",
+
+pheatmap(
+
+cor_mat,
+
 cluster_rows=TRUE,
-cluster_columns=TRUE,
-column_title=
-"Clinical association of microbial pathways"
+
+cluster_cols=FALSE,
+
+display_numbers=TRUE,
+
+number_format="%.2f",
+
+color=colorRampPalette(
+c(
+"#2166AC",
+"white",
+"#B2182B"
 )
+)(100),
+
+main=
+"Pathway association with clinical traits"
+
+)
+
 
 
 dev.off()
+
 
 
 cat(

@@ -1,91 +1,133 @@
 library(ggplot2)
 library(dplyr)
 
+dir.create("figures/Figure2_PCA",
+           recursive = TRUE,
+           showWarnings = FALSE)
 
+# Load pathway data
 pathway <- read.csv(
-"results/metacardis_filtered_pathways.csv",
-row.names=1,
-check.names=FALSE
+  "results/metacardis_filtered_pathways.csv",
+  row.names = 1,
+  check.names = FALSE
 )
 
-
+# Load metadata
 meta <- read.csv(
-"results/metacardis_T2D_control_metadata.csv",
-row.names=1
+  "results/metacardis_T2D_control_metadata.csv",
+  row.names = 1
 )
 
+# Match samples
+common <- intersect(colnames(pathway), rownames(meta))
 
-common <- intersect(
-colnames(pathway),
-rownames(meta)
-)
+pathway <- pathway[, common]
+meta <- meta[common, ]
 
-
-pathway <- pathway[,common]
-meta <- meta[common,]
-
-
-cat("Samples used:",length(common),"\n")
-
-
-# transpose
-x <- t(pathway)
-
-
+# PCA
 pca <- prcomp(
-x,
-scale.=TRUE
+  t(pathway),
+  scale. = TRUE
 )
-
-
-pca_df <- data.frame(
-PC1=pca$x[,1],
-PC2=pca$x[,2],
-Group=meta$study_condition
-)
-
 
 variance <- round(
-100*(pca$sdev^2/sum(pca$sdev^2))[1:2],
-1
+  100 * (pca$sdev^2 / sum(pca$sdev^2)),
+  2
 )
 
+plot_df <- data.frame(
+  PC1 = pca$x[,1],
+  PC2 = pca$x[,2],
+  Group = factor(
+    meta$study_condition,
+    levels = c("control","T2D")
+  )
+)
+
+cols <- c(
+  control = "#4C97D8",
+  T2D = "#D84C3F"
+)
 
 p <- ggplot(
-pca_df,
-aes(
-PC1,
-PC2,
-color=Group
-)
-)+
+  plot_df,
+  aes(
+    PC1,
+    PC2,
+    colour = Group,
+    fill = Group
+  )
+) +
+
+stat_ellipse(
+  geom = "polygon",
+  alpha = 0.15,
+  linewidth = 0
+) +
+
 geom_point(
-size=3,
-alpha=0.8
-)+
-theme_classic(base_size=16)+
+  size = 2.0,
+  alpha = 0.70
+) +
+
+scale_colour_manual(values = cols) +
+scale_fill_manual(values = cols) +
+
 labs(
-title="Functional Microbiome Pathway PCA",
-x=paste0("PC1 (",variance[1],"%)"),
-y=paste0("PC2 (",variance[2],"%)")
+  title = "PCA",
+  x = paste0("PC1 (", variance[1], "%)"),
+  y = paste0("PC2 (", variance[2], "%)")
+) +
+
+theme_classic(base_size = 15) +
+
+theme(
+
+plot.title = element_text(
+  size = 14,
+  face = "bold",
+  hjust = 0.5
+),
+
+axis.title = element_text(
+  size = 14,
+  face = "bold"
+),
+
+axis.text = element_text(
+  size = 12
+),
+
+legend.position = "right",
+
+legend.title = element_blank(),
+
+legend.text = element_text(
+  size = 12
+),
+
+plot.margin = margin(
+  15,
+  15,
+  15,
+  15
 )
 
+)
 
 ggsave(
-"figures/Figure2_PCA/PCA.pdf",
-p,
-width=7,
-height=6
+  "figures/Figure2_PCA/PCA.pdf",
+  p,
+  width = 8,
+  height = 6
 )
-
 
 ggsave(
-"figures/Figure2_PCA/PCA.png",
-p,
-width=7,
-height=6,
-dpi=600
+  "figures/Figure2_PCA/PCA.png",
+  p,
+  width = 8,
+  height = 6,
+  dpi = 600
 )
-
 
 cat("Figure 2 completed\n")
