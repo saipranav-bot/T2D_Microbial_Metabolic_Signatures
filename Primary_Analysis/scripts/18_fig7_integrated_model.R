@@ -2,9 +2,12 @@
 
 library(grid)
 
+cat("\n=====================================\n")
+cat("Figure 7: Integrated microbiome-metabolic model\n")
+cat("=====================================\n")
 
 
-outdir <- "figures/Figure7_Model"
+outdir <- "corrected/figures/Figure7_Model"
 
 dir.create(
   outdir,
@@ -13,317 +16,192 @@ dir.create(
 )
 
 
-
-# =====================================================
-# Helper functions
-# =====================================================
-
-
-draw_box <- function(
-  text,
-  x,
-  y,
-  width=0.28,
-  height=0.10
-){
+box <- function(txt,x,y,w=0.25,h=0.08,fill="white"){
 
 grid.roundrect(
-
-x=x,
-
-y=y,
-
-width=width,
-
-height=height,
-
-r=unit(0.02,"npc"),
-
-gp=gpar(
-fill="white",
-col="black",
-lwd=1.4
+ x=x,
+ y=y,
+ width=w,
+ height=h,
+ r=unit(0.02,"npc"),
+ gp=gpar(
+ fill=fill,
+ col="black",
+ lwd=1.5
+ )
 )
-
-)
-
 
 grid.text(
-
-text,
-
-x=x,
-
-y=y,
-
-gp=gpar(
-fontsize=10,
-fontface="bold"
-)
-
+ txt,
+ x=x,
+ y=y,
+ gp=gpar(
+ fontsize=10,
+ fontface="bold"
+ )
 )
 
 }
 
 
 
-draw_arrow <- function(
-y1,
-y2
-){
+arrow_down <- function(y1,y2){
 
 grid.lines(
-
-x=c(0.5,0.5),
-
-y=c(y1,y2),
-
-arrow=arrow(
-type="closed",
-length=unit(0.12,"inches")
-),
-
-gp=gpar(
-lwd=1.5
-)
-
+ x=c(0.5,0.5),
+ y=c(y1,y2),
+ arrow=arrow(
+ type="closed",
+ length=unit(0.12,"inches")
+ ),
+ gp=gpar(lwd=2)
 )
 
 }
 
 
 
+arrow_horizontal <- function(x1,x2,y){
+
+grid.lines(
+ x=c(x1,x2),
+ y=c(y,y),
+ arrow=arrow(
+ type="closed",
+ length=unit(0.12,"inches")
+ ),
+ gp=gpar(lwd=1.5)
+)
+
+}
 
 
-# =====================================================
-# Main plotting function
-# =====================================================
 
-
-create_figure <- function(){
+plot_model <- function(){
 
 
 grid.newpage()
 
 
-
-# -------------------------------
-# Title
-# -------------------------------
+grid.text(
+"Integrated Microbiome–Metabolic Model of Type 2 Diabetes",
+0.5,
+0.94,
+gp=gpar(
+fontsize=15,
+fontface="bold"
+)
+)
 
 
 grid.text(
-
-"Integrated Microbiome-Metabolic Model of Type 2 Diabetes",
-
-x=0.5,
-
-y=0.94,
-
+"Functional pathway disruption linking gut microbiome changes to T2D",
+0.5,
+0.90,
 gp=gpar(
-fontsize=13,
-fontface="bold"
+fontsize=10
+)
 )
 
-)
 
 
+# Central axis
 
-
-# -------------------------------
-# Central biological flow
-# -------------------------------
-
-
-
-draw_box(
-
-"Gut Microbiome\nAlterations",
-
+box(
+"Gut microbiome\nalteration",
 0.5,
-
-0.78
-
+0.78,
+fill="#D9EAF7"
 )
 
 
-
-draw_arrow(
-0.71,
-0.64
+arrow_down(
+0.73,
+0.65
 )
 
 
-
-
-draw_box(
-
-"Microbial Metabolic\nPathway Dysregulation",
-
+box(
+"Microbial metabolic\npathway changes",
 0.5,
-
 0.58,
-
-width=0.32
-
+fill="#FFF2CC"
 )
 
 
-
-draw_arrow(
-0.51,
-0.44
+arrow_down(
+0.53,
+0.45
 )
 
 
-
-
-draw_box(
-
-"Inflammation\nInsulin Resistance\nMetabolic Stress",
-
+box(
+"Metabolic signatures\nTCA | FAO | Lipids",
 0.5,
-
 0.38,
-
-width=0.32
-
+fill="#FCE4D6"
 )
 
 
-
-draw_arrow(
-0.31,
-0.17
+arrow_down(
+0.33,
+0.22
 )
 
 
-
-
-draw_box(
-
-"Type 2 Diabetes\nPhenotype",
-
+box(
+"Type 2 diabetes\nphenotype",
 0.5,
-
-0.11
-
+0.15,
+fill="#F4CCCC"
 )
 
 
 
+# Left mechanism
 
-# -------------------------------
-# Left annotation
-# -------------------------------
-
-
-
-grid.text(
-
-"Key metabolic signatures",
-
-x=0.15,
-
-y=0.62,
-
-gp=gpar(
-fontsize=11,
-fontface="bold"
+box(
+"Species contributors\nand dysbiosis",
+0.18,
+0.58,
+w=0.22,
+fill="#EADCF8"
 )
 
+arrow_horizontal(
+0.29,
+0.37,
+0.58
 )
 
 
 
-grid.text(
+# Right mechanism
 
-paste(
-"BCAA metabolism\n",
-"Lipid metabolism\n",
-"Peptidoglycan biosynthesis\n",
-"Inflammatory pathways"
-),
-
-x=0.15,
-
-y=0.43,
-
-just="left",
-
-gp=gpar(
-fontsize=9
+box(
+"Functional enrichment\nand pathway rewiring",
+0.82,
+0.58,
+w=0.22,
+fill="#EADCF8"
 )
 
-)
-
-
-
-
-
-# -------------------------------
-# Right annotation
-# -------------------------------
-
-
-
-grid.text(
-
-"Potential microbial drivers",
-
-x=0.85,
-
-y=0.62,
-
-gp=gpar(
-fontsize=11,
-fontface="bold"
-)
-
+arrow_horizontal(
+0.63,
+0.71,
+0.58
 )
 
 
 
 grid.text(
-
-paste(
-"Escherichia coli\n",
-"Bacteroides spp.\n",
-"Pathway contributors"
-),
-
-x=0.85,
-
-y=0.43,
-
-just="left",
-
+"MetaCardis metagenomic analysis framework",
+0.5,
+0.05,
 gp=gpar(
-fontsize=9
-)
-
-)
-
-
-
-
-
-# Footer
-
-
-grid.text(
-
-"MetaCardis cohort | Integrated pathway-level analysis",
-
-x=0.5,
-
-y=0.04,
-
-gp=gpar(
-fontsize=8,
+fontsize=9,
 fontface="italic"
 )
-
 )
 
 
@@ -331,64 +209,31 @@ fontface="italic"
 
 
 
-
-# =====================================================
-# PNG
-# =====================================================
-
-
 png(
-
-file.path(
-outdir,
-"Fig7_integrated_model.png"
-),
-
-width=3000,
-
-height=2400,
-
-res=300,
-
-bg="white"
-
+paste0(outdir,
+"/Figure7_integrated_model.png"),
+width=2400,
+height=1800,
+res=300
 )
 
-
-create_figure()
+plot_model()
 
 dev.off()
 
 
 
-
-
-# =====================================================
-# PDF
-# =====================================================
-
-
-cairo_pdf(
-
-file.path(
-outdir,
-"Fig7_integrated_model.pdf"
-),
-
-width=10,
-
-height=8
-
+pdf(
+paste0(outdir,
+"/Figure7_integrated_model.pdf"),
+width=8,
+height=6
 )
 
-
-create_figure()
-
+plot_model()
 
 dev.off()
 
 
 
-cat(
-"Figure 7 completed successfully\n"
-)
+cat("\nFigure 7 completed\n")

@@ -1,434 +1,155 @@
 #!/usr/bin/env Rscript
 
-library(dplyr)
-library(tidyr)
 library(ggplot2)
-library(ComplexHeatmap)
-library(circlize)
-library(pheatmap)
+library(dplyr)
+library(stringr)
 
 
+cat("\n=====================================\n")
+cat("Figure 6: Integrated pathway signature dot plot\n")
+cat("=====================================\n")
 
-outdir <- "figures/Figure6_Clinical"
+
+outdir <- "corrected/figures/Figure6_Pathway_Signatures"
 
 dir.create(
-outdir,
-recursive=TRUE,
-showWarnings=FALSE
+  outdir,
+  recursive = TRUE,
+  showWarnings = FALSE
 )
 
 
-
-# =====================================================
 # Load data
-# =====================================================
 
-diff <- read.csv(
-"results/metacardis_differential_pathways.csv",
-check.names=FALSE
+data <- read.csv(
+  "corrected/results/ranked_metabolic_signatures.csv",
+  check.names = FALSE
 )
 
 
-meta <- read.csv(
-"results/metacardis_T2D_control_metadata.csv",
-check.names=FALSE
-)
+# Remove unwanted pathways
+
+data <- data %>%
+  filter(
+    !grepl("UNINTEGRATED", pathway, ignore.case = TRUE)
+  )
 
 
-pathway <- read.csv(
-"results/metacardis_pathway_abundance.csv",
-check.names=FALSE
-)
+# Select top 15 significant pathways
+
+top <- data %>%
+  arrange(FDR) %>%
+  slice_head(n = 15)
 
 
+# Prepare labels
+
+top <- top %>%
+  mutate(
+    pathway_short = str_replace(
+      pathway,
+      ".*: ",
+      ""
+    ),
+    pathway_short = str_wrap(
+      pathway_short,
+      width = 45
+    ),
+    neglogFDR = -log10(FDR)
+  )
 
 
-# =====================================================
-# PANEL A
-# Differential pathways
-# =====================================================
-
-
-top_diff <- diff %>%
-
-filter(
-!grepl(
-"UNINTEGRATED",
-pathway
-)
-) %>%
-
-arrange(FDR) %>%
-
-slice_head(n=20)
-
-
-
-top_diff$short_pathway <-
-
-gsub(
-"_",
-" ",
-substr(
-top_diff$pathway,
-1,
-55
-)
-)
-
-
-top_diff$short_pathway <-
-
-factor(
-top_diff$short_pathway,
-levels=
-rev(top_diff$short_pathway)
+top$pathway_short <- factor(
+  top$pathway_short,
+  levels = rev(top$pathway_short)
 )
 
 
 
-p1 <- ggplot(
+# Plot
 
-top_diff,
+p <- ggplot(
+  top,
+  aes(
+    x = log2FC,
+    y = pathway_short,
+    size = neglogFDR,
+    colour = direction
+  )
+) +
 
-aes(
-x=short_pathway,
-y=log2FC
-)
+geom_point(
+  alpha = 0.85
+) +
 
-)+
+scale_size_continuous(
+  range = c(4,12)
+) +
 
-geom_col(
-fill="#B2182B"
-)+
-
-coord_flip()+
-
-theme_classic()+
+scale_colour_manual(
+  values = c(
+    "T2D_enriched"="#B2182B",
+    "Control_enriched"="#2166AC"
+  )
+) +
 
 labs(
+  title="Top microbial metabolic signatures associated with T2D",
+  x="log2 Fold Change",
+  y=NULL,
+  size="-log10(FDR)",
+  colour="Direction"
+) +
 
-title="Top T2D-associated microbial pathways",
+theme_classic(
+  base_size=14
+) +
 
-x=NULL,
+theme(
+  plot.title = element_text(
+    size=16,
+    face="bold",
+    hjust=0.5
+  ),
 
-y="log2 Fold Change"
+  axis.text.y = element_text(
+    size=11
+  ),
 
+  legend.position="right",
+
+  plot.margin=margin(
+    20,20,20,20
+  )
 )
 
 
 
 ggsave(
-
-paste0(
-outdir,
-"/Fig6A_differential_pathways.png"
-),
-
-p1,
-
-width=8,
-
-height=6,
-
-dpi=600,
-
-bg="white"
-
+  paste0(
+    outdir,
+    "/Figure6_pathway_signature_dotplot.png"
+  ),
+  p,
+  width=10,
+  height=8,
+  dpi=600,
+  bg="white"
 )
-
 
 
 ggsave(
-
-paste0(
-outdir,
-"/Fig6A_differential_pathways.pdf"
-),
-
-p1,
-
-width=8,
-
-height=6,
-
-device=cairo_pdf
-
+  paste0(
+    outdir,
+    "/Figure6_pathway_signature_dotplot.pdf"
+  ),
+  p,
+  width=10,
+  height=8
 )
 
 
-
-
-# =====================================================
-# Prepare abundance matrix
-# =====================================================
-
-
-rownames(pathway) <- pathway[,1]
-
-pathway <- pathway[,-1]
-
-
-pathway <- as.data.frame(t(pathway))
-
-
-pathway$sample_id <- rownames(pathway)
-
-
-
-merged <- inner_join(
-
-pathway,
-
-meta,
-
-by="sample_id"
-
-)
-
-
-
-# select pathways
-
-keep <- intersect(
-
-top_diff$pathway,
-
-colnames(merged)
-
-)
-
-
-
-heat <- merged[,keep]
-
-
-
-rownames(heat) <- merged$sample_id
-
-
-
-heat <- as.matrix(heat)
-
-
-
-# scale
-
-heat <- scale(heat)
-
-
-
-
-# =====================================================
-# PANEL B
-# Pathway heatmap
-# =====================================================
-
-
-annotation <- data.frame(
-
-Disease =
-merged$study_condition
-
-)
-
-
-rownames(annotation)<-
-
-merged$sample_id
-
-
-
-png(
-
-paste0(
-outdir,
-"/Fig6B_pathway_heatmap.png"
-),
-
-width=2600,
-
-height=3000,
-
-res=300
-
-)
-
-
-
-pheatmap(
-
-t(heat),
-
-annotation_col=annotation,
-
-cluster_cols=TRUE,
-
-cluster_rows=TRUE,
-
-show_colnames=FALSE,
-
-fontsize_row=8,
-
-color=colorRampPalette(
-c(
-"#2166AC",
-"white",
-"#B2182B"
-)
-)(100),
-
-main=
-"T2D-associated microbial pathway abundance"
-
-)
-
-
-
-dev.off()
-
-
-
-pdf(
-
-paste0(
-outdir,
-"/Fig6B_pathway_heatmap.pdf"
-),
-
-width=10,
-
-height=12
-
-)
-
-
-
-pheatmap(
-
-t(heat),
-
-annotation_col=annotation,
-
-cluster_cols=TRUE,
-
-cluster_rows=TRUE,
-
-show_colnames=FALSE,
-
-fontsize_row=8,
-
-color=colorRampPalette(
-c(
-"#2166AC",
-"white",
-"#B2182B"
-)
-)(100),
-
-main=
-"T2D-associated microbial pathway abundance"
-
-)
-
-
-
-dev.off()
-
-
-
-
-# =====================================================
-# PANEL C
-# Clinical correlation
-# =====================================================
-
-
-clinical <- merged[,c(
-"BMI",
-"hba1c"
-)]
-
-
-
-cor_mat <- cor(
-
-merged[,keep],
-
-clinical,
-
-method="spearman",
-
-use="complete.obs"
-
-)
-
-
-
-rownames(cor_mat)<-
-
-gsub(
-"_",
-" ",
-substr(
-rownames(cor_mat),
-1,
-40
-)
-)
-
-
-
-png(
-
-paste0(
-outdir,
-"/Fig6C_clinical_correlation.png"
-),
-
-width=1600,
-
-height=1800,
-
-res=300,
-
-bg="white"
-
-)
-
-
-
-pheatmap(
-
-cor_mat,
-
-cluster_rows=TRUE,
-
-cluster_cols=FALSE,
-
-display_numbers=TRUE,
-
-number_format="%.2f",
-
-color=colorRampPalette(
-c(
-"#2166AC",
-"white",
-"#B2182B"
-)
-)(100),
-
-main=
-"Pathway association with clinical traits"
-
-)
-
-
-
-dev.off()
-
-
-
-cat(
-"Figure 6 completed successfully\n"
-)
+cat("\n=====================================\n")
+cat("Figure 6 completed\n")
+cat("Pathways plotted:", nrow(top), "\n")
+cat("=====================================\n")
