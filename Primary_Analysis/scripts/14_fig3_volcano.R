@@ -13,7 +13,7 @@ cat("=====================================\n")
 
 # Create output folder
 dir.create(
-    "corrected/figures/Figure3_Volcano",
+    "publication_figures/Figure3_Volcano",
     recursive = TRUE,
     showWarnings = FALSE
 )
@@ -24,7 +24,7 @@ dir.create(
 #############################################################
 
 data <- read.csv(
-    "corrected/results/metabolic_pathway_annotation.csv",
+    "results/metabolic_pathway_annotation.csv",
     check.names = FALSE
 )
 
@@ -212,7 +212,7 @@ theme(
 #############################################################
 
 ggsave(
-    "corrected/figures/Figure3_Volcano/volcano_plot.png",
+    "publication_figures/Figure3_Volcano/volcano_plot.png",
 
     p,
 
@@ -227,7 +227,7 @@ ggsave(
 
 
 ggsave(
-    "corrected/figures/Figure3_Volcano/volcano_plot.pdf",
+    "publication_figures/Figure3_Volcano/volcano_plot.pdf",
 
     p,
 

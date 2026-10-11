@@ -17,7 +17,7 @@ cat("=====================================\n\n")
 #################################################
 
 dir.create(
-    "corrected/figures/Figure2_PCA",
+    "publication_figures/Figure2_PCA",
     recursive = TRUE,
     showWarnings = FALSE
 )
@@ -29,7 +29,7 @@ dir.create(
 #################################################
 
 pathway <- read.csv(
-    "corrected/results/metacardis_filtered_pathways.csv",
+    "results/metacardis_filtered_pathways.csv",
     row.names = 1,
     check.names = FALSE
 )
@@ -40,7 +40,7 @@ pathway <- read.csv(
 #################################################
 
 meta <- read.csv(
-    "corrected/results/metacardis_T2D_control_metadata.csv",
+    "results/metacardis_T2D_control_metadata.csv",
     row.names = 1
 )
 
@@ -223,7 +223,7 @@ plot.margin = margin(
 #################################################
 
 ggsave(
-    "corrected/figures/Figure2_PCA/PCA.png",
+    "publication_figures/Figure2_PCA/PCA.png",
     p,
     width=9,
     height=8,
@@ -238,7 +238,7 @@ ggsave(
 #################################################
 
 ggsave(
-    "corrected/figures/Figure2_PCA/PCA.pdf",
+    "publication_figures/Figure2_PCA/PCA.pdf",
     p,
     width=9,
     height=8,

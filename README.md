@@ -245,12 +245,27 @@ Major packages include
 # Reproducibility
 
 All analyses can be reproduced by executing the scripts sequentially.
+Run the scripts from the `Primary_Analysis/` directory so that the relative
+`results/` and `publication_figures/` paths resolve correctly:
+
+```
+cd Primary_Analysis
+Rscript scripts/01_download_data.R
+Rscript scripts/02_load_metacardis.R
+...
+Rscript scripts/18_fig7_integrated_model.R
+```
 
 The computational environment is provided in
 
 ```
 t2dmeta_environment.yml
 ```
+
+Data access relies on the Bioconductor package `curatedMetagenomicData`
+(ExperimentHub), which retrieves the MetaCardis pathway-abundance dataset on
+first run. Steps 01–10 write tables to `Primary_Analysis/results/`; steps
+12–18 write figures to `Primary_Analysis/publication_figures/`.
 
 ---
 

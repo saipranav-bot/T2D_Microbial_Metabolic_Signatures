@@ -10,7 +10,7 @@ cat("Figure 4: Metabolic pathway dot plot\n")
 cat("=====================================\n")
 
 
-outdir <- "corrected/figures/Figure4_Dotplot"
+outdir <- "publication_figures/Figure4_Dotplot"
 
 dir.create(
   outdir,
@@ -23,7 +23,7 @@ dir.create(
 # Load data
 
 diff <- read.csv(
-  "corrected/results/metacardis_differential_pathways.csv",
+  "results/metacardis_differential_pathways.csv",
   check.names = FALSE
 )
 

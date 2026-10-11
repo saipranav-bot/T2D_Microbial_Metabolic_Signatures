@@ -66,6 +66,18 @@ metadata <- metadata[common_samples, ]
 
 
 #############################################################
+# Save the sample-matched, species-resolved abundance matrix
+# (still contains |g__ species-stratified features) for the
+# downstream species-contribution analysis (step 10).
+#############################################################
+
+write.csv(
+    pathway_data,
+    "results/metacardis_analysis_pathway_abundance.csv"
+)
+
+
+#############################################################
 # Filter global pathways only
 #############################################################
 

@@ -7,6 +7,13 @@ library(ggplot2)
 library(dplyr)
 
 
+dir.create(
+    "publication_figures/Figure1_Cohort",
+    recursive = TRUE,
+    showWarnings = FALSE
+)
+
+
 cat("\n=====================================\n")
 cat("Figure 1: Cohort distribution\n")
 cat("=====================================\n\n")
@@ -17,7 +24,7 @@ cat("=====================================\n\n")
 #################################################
 
 meta <- read.csv(
-    "corrected/results/metacardis_T2D_control_metadata.csv",
+    "results/metacardis_T2D_control_metadata.csv",
     row.names = 1
 )
 
@@ -135,7 +142,7 @@ expand_limits(
 #################################################
 
 ggsave(
-    "corrected/figures/Figure1_Cohort/cohort_size.png",
+    "publication_figures/Figure1_Cohort/cohort_size.png",
     p,
     width = 8,
     height = 7,
@@ -145,7 +152,7 @@ ggsave(
 
 
 ggsave(
-    "corrected/figures/Figure1_Cohort/cohort_size.pdf",
+    "publication_figures/Figure1_Cohort/cohort_size.pdf",
     p,
     width = 8,
     height = 7,

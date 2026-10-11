@@ -11,7 +11,7 @@ cat("Figure 5: Indexed Species Pathway Network\n")
 cat("=====================================\n")
 
 
-outdir <- "corrected/figures/Figure5_Species_Network"
+outdir <- "publication_figures/Figure5_Species_Network"
 
 dir.create(
     outdir,
@@ -23,7 +23,7 @@ dir.create(
 # Load data
 
 data <- read.csv(
-    "corrected/results/microbial_species_contributors.csv",
+    "results/microbial_species_contributors.csv",
     check.names = FALSE
 )
 

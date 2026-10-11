@@ -10,7 +10,7 @@ cat("Figure 6: Integrated pathway signature dot plot\n")
 cat("=====================================\n")
 
 
-outdir <- "corrected/figures/Figure6_Pathway_Signatures"
+outdir <- "publication_figures/Figure6_Pathway_Signatures"
 
 dir.create(
   outdir,
@@ -22,7 +22,7 @@ dir.create(
 # Load data
 
 data <- read.csv(
-  "corrected/results/ranked_metabolic_signatures.csv",
+  "results/ranked_metabolic_signatures.csv",
   check.names = FALSE
 )
 

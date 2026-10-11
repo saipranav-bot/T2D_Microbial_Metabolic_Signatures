@@ -7,7 +7,7 @@ cat("Figure 7: Integrated microbiome-metabolic model\n")
 cat("=====================================\n")
 
 
-outdir <- "corrected/figures/Figure7_Model"
+outdir <- "publication_figures/Figure7_Model"
 
 dir.create(
   outdir,
